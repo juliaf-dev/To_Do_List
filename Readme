@@ -1,0 +1,15 @@
+# Projeto prático integrador
+
+### Fundamentos de Desenvolvimento Web
+
+**Tema: Sistema de Gerenciamento de Tarefas**
+
+- **Descrição: Desenvolver uma aplicação básica para gerenciar tarefas com funcionalidades de criação, edição, exclusão e marcação de tarefas como concluídas.**
+- **Objetivos:**
+    - Aplicar os conceitos de arquitetura web (MVC ou REST).
+    - Utilizar verbos HTTP corretamente.
+    - Configurar um fluxo de versionamento usando Git e Gitflow.
+    - Documentar a API utilizando ferramentas como SwaggerUI ou Redoc.
+    - Planejar o projeto utilizando ferramentas como Notion ou Trello.
+    - Utilizar boas práticas e código limpo.
+    - Adicionar autenticação básica (login/logout).
