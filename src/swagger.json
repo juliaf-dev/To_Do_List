@@ -1,0 +1,296 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Task Manager API",
+      "version": "1.0.0",
+      "description": "API para gerenciamento de tarefas"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api",
+        "description": "Servidor de desenvolvimento"
+      }
+    ],
+    "paths": {
+      "/tasks": {
+        "get": {
+          "tags": ["Tasks"],
+          "summary": "Lista todas as tarefas",
+          "responses": {
+            "200": {
+              "description": "Lista de tarefas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Task"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [{"BearerAuth": []}]
+        },
+        "post": {
+          "tags": ["Tasks"],
+          "summary": "Cria uma nova tarefa",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewTask"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Tarefa criada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "security": [{"BearerAuth": []}]
+        }
+      },
+      "/tasks/{id}": {
+        "get": {
+          "tags": ["Tasks"],
+          "summary": "Obtém uma tarefa pelo ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tarefa encontrada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Tarefa não encontrada"
+            }
+          },
+          "security": [{"BearerAuth": []}]
+        },
+        "put": {
+          "tags": ["Tasks"],
+          "summary": "Atualiza uma tarefa",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTask"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Tarefa atualizada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Tarefa não encontrada"
+            }
+          },
+          "security": [{"BearerAuth": []}]
+        },
+        "delete": {
+          "tags": ["Tasks"],
+          "summary": "Remove uma tarefa",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tarefa removida"
+            },
+            "404": {
+              "description": "Tarefa não encontrada"
+            }
+          },
+          "security": [{"BearerAuth": []}]
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "Faz login do usuário",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "example": "admin"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "admin123"
+                    }
+                  },
+                  "required": ["username", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login bem-sucedido",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      },
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Credenciais inválidas"
+            }
+          }
+        }
+      },
+      "/auth/logout": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "Faz logout do usuário",
+          "responses": {
+            "200": {
+              "description": "Logout bem-sucedido"
+            }
+          },
+          "security": [{"BearerAuth": []}]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Task": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "completed": {
+              "type": "boolean"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": ["id", "title", "completed", "createdAt"]
+        },
+        "NewTask": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "example": "Fazer compras"
+            },
+            "description": {
+              "type": "string",
+              "example": "Comprar leite e ovos"
+            }
+          },
+          "required": ["title"]
+        },
+        "UpdateTask": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "example": "Fazer compras"
+            },
+            "description": {
+              "type": "string",
+              "example": "Comprar leite, ovos e pão"
+            },
+            "completed": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "username": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    }
+  }
