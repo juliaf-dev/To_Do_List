@@ -106,19 +106,25 @@ function renderTasks(tasks) {
   
   tasks.forEach(task => {
     const taskElement = document.createElement('div');
-    taskElement.className = `list-group-item list-group-item-action ${task.completed ? 'list-group-item-success' : ''}`;
+    taskElement.className = `list-group-item list-group-item-action ${task.completed ? 'completed-task' : ''}`;
     taskElement.innerHTML = `
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">${task.title}</h5>
-        <small>${new Date(task.createdAt).toLocaleDateString()}</small>
-      </div>
-      <p class="mb-1">${task.description || 'Sem descrição'}</p>
-      <div class="btn-group btn-group-sm">
-        <button class="btn btn-outline-primary edit-btn" data-id="${task.id}">Editar</button>
-        <button class="btn btn-outline-danger delete-btn" data-id="${task.id}">Excluir</button>
-        <button class="btn btn-outline-success toggle-btn" data-id="${task.id}">
-          ${task.completed ? 'Desmarcar' : 'Concluir'}
-        </button>
+      <div class="d-flex w-100 justify-content-between align-items-center">
+        <div class="form-check form-check-inline flex-grow-1">
+          <input class="form-check-input toggle-btn" type="checkbox" ${task.completed ? 'checked' : ''} data-id="${task.id}">
+          <div class="ms-2 task-content">
+            <h5 class="mb-1 task-title">${task.title}</h5>
+           
+            <div class="task-description">${task.description || ''}</div>
+          </div>
+        </div>
+        <div class="task-actions">
+          <button class="btn btn-link text-primary edit-btn" data-id="${task.id}" title="Editar">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button class="btn btn-link text-danger delete-btn" data-id="${task.id}" title="Excluir">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
     `;
     
@@ -134,8 +140,8 @@ function renderTasks(tasks) {
     btn.addEventListener('click', handleDeleteTask);
   });
   
-  document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.addEventListener('click', handleToggleTask);
+  document.querySelectorAll('.toggle-btn').forEach(checkbox => {
+    checkbox.addEventListener('change', handleToggleTask);
   });
 }
 

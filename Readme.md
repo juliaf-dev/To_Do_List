@@ -46,3 +46,37 @@ Um sistema simples para gerenciamento de tarefas com autenticação básica, des
   Acesse a aplicação:
     - Interface web: http://localhost:3000
     - Documentação da API: http://localhost:3000/api-docs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ tasks.forEach(task => {
+    const taskElement = document.createElement('div');
+    taskElement.className = `list-group-item list-group-item-action ${task.completed ? 'list-group-item-success' : ''}`;
+    taskElement.innerHTML = `
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">${task.title}</h5>
+        <small>${new Date(task.createdAt).toLocaleDateString()}</small> 
+      </div>
+
+
+    ** <small>${new Date(task.createdAt).toLocaleDateString()}</small> 
