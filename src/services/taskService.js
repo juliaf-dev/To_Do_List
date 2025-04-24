@@ -1,28 +1,27 @@
 // Simulando um "banco de dados" em memória
-let tasks = [
-    { id: '1', title: 'Estudar Node.js', description: 'Aprender sobre middlewares', completed: false },
-    { id: '2', title: 'Fazer compras', description: 'Comprar leite e ovos', completed: true }
-  ];
+let tasks = [];
   
-  // Serviço para operações com tarefas
+    // Operações com tarefas
+
   const taskService = {
     // Retorna todas as tarefas
     getAllTasks: () => {
       return tasks;
     },
   
-    // Cria uma nova tarefa
-    createTask: (title, description) => {
-      const nezzwTask = {
-        id: Date.now().toString(),
-        title,
-        description: description || '',
-        completed: false,
-        createdAt: new Date().toISOString()
-      };
-      tasks.push(newTask);
-      return newTask;
-    },
+   // Cria uma nova tarefa
+  createTask: (title, description) => {
+    const newTask = {
+      id: Date.now().toString(),
+      title,
+      description: description || '',
+      completed: false,
+      createdAt: new Date().toISOString()
+    };
+    tasks.push(newTask);
+    
+    return newTask;
+  },
   
     // Busca uma tarefa pelo ID
     getTaskById: (id) => {

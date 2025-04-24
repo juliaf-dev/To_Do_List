@@ -1,6 +1,6 @@
 const taskService = require('../services/taskService');
 
-// Controlador para manipulação de tarefas
+// Controle de tarefas
 const taskController = {
   // GET /api/tasks - Retorna todas as tarefas
   getAllTasks: (req, res) => {
@@ -16,6 +16,7 @@ const taskController = {
   createTask: (req, res) => {
     try {
       const { title, description } = req.body;
+      console.log(title, description);
       if (!title) {
         return res.status(400).json({ message: 'Título é obrigatório' });
       }
@@ -26,6 +27,8 @@ const taskController = {
       res.status(500).json({ message: error.message });
     }
   },
+      
+
 
   // GET /api/tasks/:id - Retorna uma tarefa pelo ID
   getTaskById: (req, res) => {
