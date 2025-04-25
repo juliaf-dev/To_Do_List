@@ -261,7 +261,6 @@ async function handleToggleTask(e) {
     const taskId = e.target.getAttribute('data-id');
     
     try {
-      // Primeiro obtemos a tarefa atual de forma mais segura
       const getResponse = await fetch(`/api/tasks/${taskId}`, {
         headers: {
           'Authorization': currentToken
@@ -278,7 +277,6 @@ async function handleToggleTask(e) {
         throw new Error('Tarefa não encontrada');
       }
   
-      // Depois atualizamos apenas o status de completed
       const putResponse = await fetch(`/api/tasks/${taskId}`, {
         method: 'PUT',
         headers: {
