@@ -1,8 +1,5 @@
 // Simulando um "banco de dados" em memória
-let tasks = [
-    { id: '1', title: 'Estudar Node.js', description: 'Aprender sobre middlewares', completed: false },
-    { id: '2', title: 'Fazer compras', description: 'Comprar leite e ovos', completed: true }
-  ];
+let tasks = [];
   
     // Operações com tarefas
 
