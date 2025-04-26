@@ -38,29 +38,21 @@ async function handleLogin(e) {
   
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
-  
-  try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
-    });
-    
-    const data = await response.json();
-    
-    if (response.ok) {
-      currentToken = data.token;
-      localStorage.setItem('taskManagerToken', currentToken);
-      toggleAuthSections();
-      loadTasks();
-    } else {
-      alert(data.message || 'Erro no login');
-    }
-  } catch (error) {
-    console.error('Erro:', error);
-    alert('Erro ao fazer login');
+
+  // Usuário simulado (o mesmo que você definiu no backend)
+  const validUser = { 
+    username: 'admin', 
+    password: 'admin123' 
+  };
+
+  if (username === validUser.username && password === validUser.password) {
+    // Simula um token de autenticação
+    currentToken = 'simulated-token-' + Math.random().toString(36).substr(2);
+    localStorage.setItem('taskManagerToken', currentToken);
+    toggleAuthSections();
+    loadTasks();
+  } else {
+    alert('Credenciais inválidas! Use admin/admin123');
   }
 }
 
