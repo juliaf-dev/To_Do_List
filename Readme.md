@@ -41,7 +41,7 @@ Um sistema simples para gerenciamento de tarefas com autenticação básica, des
     npm install express body-parser cors swagger-ui-express
 
   Inicie o servidor:
-    node src/app.js
+    
 
   Acesse a aplicação:
     - Interface web: http://localhost:3000

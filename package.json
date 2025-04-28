@@ -2,10 +2,16 @@
   "name": "to_do_list",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "start": "node dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  
+    "scripts": {
+      "start": "node src/app.js",
+      "dev": "nodemon src/app.js",
+      "vercel-build": "npm install && npm run build"
+    },
+    "engines": {
+      "node": ">=14.x"
+    },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/juliaf-dev/To_Do_List.git"
